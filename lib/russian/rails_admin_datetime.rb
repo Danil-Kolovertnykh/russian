@@ -2,7 +2,6 @@ require 'rails_admin/support/datetime'
 
 class RailsAdmin::Support::Datetime
   class << self
-    alias_method :delocalize_without_russian, :delocalize
     def delocalize(date_string, format)
       ret = date_string
       if I18n.locale == :ru
@@ -19,6 +18,8 @@ class RailsAdmin::Support::Datetime
           end
         end
       end
+      alias_method :delocalize_without_russian, :delocalize
+
       ret = delocalize_without_russian(ret, format)
       ret
     end
